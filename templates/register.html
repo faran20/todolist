@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+
+{% if message %}
+    <div>{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    Name:
+    <div class="form-group" id="h">
+        <input class="form-control" type="text" name="name">
+    </div>
+    Email:
+    <div class="form-group" id="g">
+        <input class="form-control" type="email" name="email">
+    </div>
+    Password
+    <div class="form-group" id="e">
+        <input class="form-control" type="password" name="password">
+    </div>
+    <input class="btn btn-primary" type="submit" value="Register" id="submit">
+</form>
+<a href="{% url 'login' %}">Login</a>
+
+</body>
+</html>

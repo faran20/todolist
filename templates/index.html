@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+<h2>To Do List</h2>
+<a class="btn btn-sm" href="{% url 'index' %}">Home</a>
+<a class="btn btn-sm" href="{% url 'logout' %}">Log Out</a>
+<h3>Create New Task</h3>
+<form action="{% url 'newTask' %}" method="post">
+    <div class="form-group">
+        <span>Name:</span>
+        <input class="form-control" type="text" name="name">
+        <br>
+        <span>Body: </span>
+        <input class="form-control" type="text-area" name="body">
+        <br>
+        <span>Priority: </span>
+        <input class="form-control" type="number" name="priority">
+        <br>
+    </div>
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+
+<h3>All Tasks</h3>
+
+{% for data in data %}
+    <span>Task:<a value="{{ data.name }}" href="{% url 'taskView' data.name %}">{{ data.name }}</a></span>
+    <span>Priority :{{ data.priority }}</span>
+    <span>Created :{{ data.created_on }}</span>
+    <br>
+{% endfor %}
+
+<h3>Completed</h3>
+{% for data in data %}
+    {% if data.completed %}
+        <span>Task Name:<a value="{{ data.name }}" href="{% url 'taskView' data.name %}">{{ data.name }}</a></span>
+        <span>Created On :{{ data.created_on }}</span>
+        <br>
+    {% endif %}
+{% endfor %}
+
+
+</body>
+</html>

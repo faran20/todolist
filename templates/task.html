@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Task</title>
+</head>
+<body>
+<a class="btn btn-sm btn-outline-primary" href="{% url 'index' %}">Home</a>
+<hr>
+
+{% for data in data %}
+            <span>Task Name:{{ data.name }}</span>
+            <br>
+            <span>Created On:{{ data.created_on }}</span>
+            <br>
+            <span>Details:{{ data.body }}</span>
+            <br>
+    Update Task Status:
+            {% if data.completed %}
+                <span>Task Completed ? <a href="{% url 'taskNotCompleted' data.name %}">YES</a></span>
+                <br>
+            {% else %}
+                <span>Task <a href="{% url 'taskCompleted' data.name %}">NOT</a> Completed:</span>
+                <br>
+            {% endif %}
+            <span>Delete this task: <a class="btn btn-outline-primary" href="{% url 'deleteTask' data.name %}">Delete</a></span>
+            <br>
+
+    <br>
+{% endfor %}
+</body>
+</html>
